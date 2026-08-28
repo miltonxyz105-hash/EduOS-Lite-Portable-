@@ -45,7 +45,7 @@ export default function Taskbar({
     { id: 'files', name: 'Explorador de Archivos', icon: Folder, color: 'text-red-500' },
     { id: 'settings', name: 'Configuración', icon: Settings, color: 'text-red-400' },
     { id: 'games', name: 'Lanzador de Juegos', icon: Gamepad2, color: 'text-red-500' },
-    { id: 'settings', name: 'Rendimiento', icon: Cpu, color: 'text-red-400' },
+    { id: 'trash', name: 'Papelera', icon: MemoryStick, color: 'text-gray-400' },
   ]
 
   return (

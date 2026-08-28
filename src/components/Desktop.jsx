@@ -1,4 +1,3 @@
-import React from 'react'
 import { Folder, Settings, Gamepad2, Trash2 } from 'lucide-react'
 
 const desktopIcons = [

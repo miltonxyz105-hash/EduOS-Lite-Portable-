@@ -2,13 +2,10 @@ import { useState } from 'react'
 import {
   Settings,
   Zap,
-  Monitor,
-  Shield,
   Info,
   ToggleLeft,
   ToggleRight,
   Cpu,
-  HardDrive,
   MemoryStick,
   Check,
   RefreshCw,
@@ -19,7 +16,6 @@ import {
 export default function SettingsWindow() {
   const [boostActive, setBoostActive] = useState(true)
   const [savingBoost, setSavingBoost] = useState(false)
-  const [lowResourceMode, setLowResourceMode] = useState(true)
   const [animations, setAnimations] = useState(false)
   const [activeTab, setActiveTab] = useState('system')
 

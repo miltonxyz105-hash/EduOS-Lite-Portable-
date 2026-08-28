@@ -1,9 +1,6 @@
-import React from 'react'
-
 export default function WindowManager({ window: windowData, onClose, onMinimize, onFocus, zIndex }) {
   if (!windowData || windowData.isMinimized) return null
 
-  // Soporta tanto la propiedad 'Component' como 'content'
   const ContentComponent = windowData.Component
   const Icon = windowData.icon
 
