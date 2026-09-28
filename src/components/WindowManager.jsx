@@ -1,8 +1,46 @@
-export default function WindowManager({ window: windowData, onClose, onMinimize, onFocus, zIndex }) {
+import { useEffect, useRef, useState } from 'react'
+
+export default function WindowManager({ window: windowData, onClose, onMinimize, onFocus, onDrag, zIndex }) {
   if (!windowData || windowData.isMinimized) return null
 
   const ContentComponent = windowData.Component
   const Icon = windowData.icon
+  const titleRef = useRef(null)
+  const [isDragging, setIsDragging] = useState(false)
+  const dragState = useRef({ startX: 0, startY: 0, origX: 0, origY: 0 })
+
+  useEffect(() => {
+    if (!isDragging) return
+
+    const handleMove = (e) => {
+      const dx = e.clientX - dragState.current.startX
+      const dy = e.clientY - dragState.current.startY
+      const newX = Math.max(0, dragState.current.origX + dx)
+      const newY = Math.max(0, dragState.current.origY + dy)
+      if (onDrag) onDrag(windowData.id, { x: newX, y: newY })
+    }
+    const handleUp = () => setIsDragging(false)
+
+    window.addEventListener('mousemove', handleMove)
+    window.addEventListener('mouseup', handleUp)
+    return () => {
+      window.removeEventListener('mousemove', handleMove)
+      window.removeEventListener('mouseup', handleUp)
+    }
+  }, [isDragging, windowData.id, onDrag])
+
+  const startDrag = (e) => {
+    if (e.button !== 0) return
+    e.stopPropagation()
+    const pos = windowData.position
+    dragState.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      origX: pos.x,
+      origY: pos.y,
+    }
+    setIsDragging(true)
+  }
 
   return (
     <div
@@ -14,11 +52,19 @@ export default function WindowManager({ window: windowData, onClose, onMinimize,
         width: windowData.size.width,
         height: windowData.size.height,
       }}
-      className="absolute bg-gray-900 text-white rounded-lg shadow-2xl border border-gray-800 flex flex-col overflow-hidden select-none"
+      className={`absolute bg-gray-900 text-white rounded-lg shadow-2xl border border-gray-800 flex flex-col overflow-hidden select-none ${
+        isDragging ? 'cursor-grabbing' : ''
+      }`}
     >
-      {/* Barra de título de la ventana */}
-      <div className="bg-gray-950 px-4 py-2 flex items-center justify-between cursor-move border-b border-gray-800">
-        <div className="flex items-center space-x-2">
+      {/* Barra de título de la ventana (drag handle) */}
+      <div
+        ref={titleRef}
+        onMouseDown={startDrag}
+        className={`bg-gray-950 px-4 py-2 flex items-center justify-between ${
+          isDragging ? 'cursor-grabbing' : 'cursor-move'
+        } border-b border-gray-800 select-none`}
+      >
+        <div className="flex items-center space-x-2 pointer-events-none">
           {Icon && <Icon className={`w-4 h-4 ${windowData.color}`} />}
           <span className="text-xs font-semibold text-gray-200">{windowData.title}</span>
         </div>

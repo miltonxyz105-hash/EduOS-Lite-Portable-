@@ -2,8 +2,6 @@ import { useState } from 'react'
 import {
   Usb,
   Cloud,
-  Download,
-  Upload,
   RefreshCw,
   HardDrive,
   Folder,

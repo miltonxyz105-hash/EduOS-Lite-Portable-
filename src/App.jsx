@@ -168,6 +168,12 @@ function App() {
     setZOrder((prev) => [...prev.filter((z) => z !== id), id])
   }
 
+  const handleDrag = (id, position) => {
+    setWindows((prev) =>
+      prev.map((w) => (w.id === id ? { ...w, position } : w))
+    )
+  }
+
   if (isLocked) {
     return <LockScreen onUnlock={handleUnlock} />
   }
@@ -191,6 +197,7 @@ function App() {
           onClose={closeWindow}
           onMinimize={toggleWindow}
           onFocus={focusWindow}
+          onDrag={handleDrag}
           zIndex={getZIndex(win.id)}
         />
       ))}

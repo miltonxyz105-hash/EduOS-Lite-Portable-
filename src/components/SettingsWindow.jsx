@@ -15,6 +15,7 @@ import {
   Gauge,
   Layers,
   Activity,
+  MemoryStick,
 } from 'lucide-react'
 
 export default function SettingsWindow() {

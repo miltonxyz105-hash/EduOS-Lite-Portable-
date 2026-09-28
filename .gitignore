@@ -79,3 +79,6 @@ __pycache__/
 .Python
 *.egg-info/
 *.egg
+
+.vercel
+.env*
