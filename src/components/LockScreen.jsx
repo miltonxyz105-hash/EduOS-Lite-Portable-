@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Clock, Battery, Wifi, Lock, Power } from 'lucide-react'
+import { Clock, Battery, Wifi, Lock, Shield, Users } from 'lucide-react'
 
 export default function LockScreen({ onUnlock }) {
   const [time, setTime] = useState(new Date())
@@ -31,75 +31,75 @@ export default function LockScreen({ onUnlock }) {
   }
 
   return (
-    <div className="w-full h-full bg-black flex flex-col items-center justify-center relative overflow-hidden">
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-20 left-20 w-96 h-96 rounded-full bg-red-600 blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 rounded-full bg-red-800 blur-3xl"></div>
+    <div className="w-full h-full bg-slate-950 flex flex-col items-center justify-center relative overflow-hidden">
+      <div className="absolute inset-0 opacity-15">
+        <div className="absolute top-20 left-20 w-80 h-80 rounded-full bg-blue-800 blur-3xl"></div>
+        <div className="absolute bottom-20 right-20 w-80 h-80 rounded-full bg-slate-700 blur-3xl"></div>
       </div>
 
-      <div className="absolute top-6 right-6 flex items-center gap-4 text-gray-500 z-10">
+      <div className="absolute top-6 right-6 flex items-center gap-4 text-slate-500 z-10">
         <div className="flex items-center gap-1.5">
-          <Wifi size={16} className="text-red-500" />
-          <span className="text-xs">Wi-Fi</span>
+          <Wifi size={15} className="text-blue-500" />
+          <span className="text-[11px]">Wi-Fi</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <Battery size={16} className="text-red-500" />
-          <span className="text-xs">87%</span>
+          <Battery size={15} className="text-green-500" />
+          <span className="text-[11px]">87%</span>
         </div>
       </div>
 
-      <div className="z-10 text-center mb-12">
-        <div className="flex items-center justify-center gap-3 mb-6">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-700 to-red-500 flex items-center justify-center shadow-neon-red">
-            <Power size={32} className="text-white" />
+      <div className="z-10 text-center mb-10">
+        <div className="flex items-center justify-center gap-3 mb-5">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-700 to-blue-500 flex items-center justify-center">
+            <Shield size={28} className="text-white" />
           </div>
         </div>
         <div className="mb-2">
-          <h1 className="text-8xl font-light text-white tracking-tight flex items-center justify-center gap-3">
-            <Clock size={64} className="text-red-500 opacity-70" />
+          <h1 className="text-7xl font-light text-white tracking-tight flex items-center justify-center gap-3">
+            <Clock size={56} className="text-blue-500 opacity-60" />
             {formatTime(time)}
           </h1>
         </div>
-        <p className="text-xl text-gray-500 capitalize">{formatDate(time)}</p>
+        <p className="text-lg text-slate-500 capitalize">{formatDate(time)}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="z-10 w-full max-w-sm">
-        <div className="bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 shadow-2xl">
-          <div className="flex flex-col items-center mb-6">
-            <div className="w-20 h-20 rounded-full bg-black border-2 border-red-500/60 flex items-center justify-center mb-3">
-              <Lock size={32} className="text-red-500" />
+        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6">
+          <div className="flex flex-col items-center mb-5">
+            <div className="w-18 h-18 rounded-full bg-slate-950 border-2 border-blue-500/50 flex items-center justify-center mb-3 py-3 px-4">
+              <Users size={28} className="text-blue-500" />
             </div>
-            <h2 className="text-white font-semibold text-lg">Usuario Gamer</h2>
-            <p className="text-gray-500 text-sm">HyperX OS v1.0</p>
+            <h2 className="text-white font-semibold text-base">Estudiante / Docente</h2>
+            <p className="text-slate-500 text-xs">EduOS Lite - GovEdu Edition</p>
           </div>
 
-          <div className="mb-5">
+          <div className="mb-4">
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Contraseña (cualquier texto)"
-              className="w-full px-4 py-3 bg-black border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all"
+              placeholder="Ingrese contraseña (cualquier texto)"
+              className="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 text-sm"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-3 bg-gradient-to-r from-red-700 to-red-600 hover:from-red-600 hover:to-red-500 text-white font-semibold rounded-xl transition-all shadow-neon-red flex items-center justify-center gap-2"
+            className="w-full py-2.5 bg-gradient-to-r from-blue-700 to-blue-600 hover:from-blue-600 hover:to-blue-500 text-white font-semibold rounded-lg text-sm flex items-center justify-center gap-2"
           >
-            <Power size={18} />
+            <Lock size={16} />
             Iniciar Sesión
           </button>
 
-          <p className="text-center text-gray-600 text-xs mt-4">
-            Presiona Enter o haz clic para acceder
+          <p className="text-center text-slate-600 text-[11px] mt-3">
+            Presione Enter o haga clic para acceder
           </p>
         </div>
       </form>
 
-      <div className="absolute bottom-6 z-10 flex items-center gap-2 text-gray-600 text-xs">
-        <Power size={12} className="text-red-500/60" />
-        <span>HyperX OS - Black & Red Edition</span>
+      <div className="absolute bottom-6 z-10 flex items-center gap-2 text-slate-600 text-[11px]">
+        <Shield size={11} className="text-blue-500/60" />
+        <span>EduOS Lite - Government & Educational Edition</span>
       </div>
     </div>
   )

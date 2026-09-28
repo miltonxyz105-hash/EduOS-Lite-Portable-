@@ -63,3 +63,19 @@ System Volume Information
 coverage
 *.lcov
 .nyc_output
+
+# Virtual environments (GovEdu hard constraint)
+.venv
+venv
+env
+ENV
+.hatch
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+*.egg

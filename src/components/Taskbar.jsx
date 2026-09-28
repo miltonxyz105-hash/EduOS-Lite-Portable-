@@ -3,15 +3,20 @@ import {
   Menu,
   Folder,
   Settings,
-  Gamepad2,
   Cpu,
   MemoryStick,
   Clock,
-  Power,
+  Shield,
   ChevronRight,
   X,
   Minus,
   Square,
+  BookOpen,
+  Zap,
+  Usb,
+  Activity,
+  Search,
+  Trash2,
 } from 'lucide-react'
 
 export default function Taskbar({
@@ -20,52 +25,62 @@ export default function Taskbar({
   onToggleWindow,
   onCloseWindow,
   onFocusWindow,
+  studyModeActive,
+  setStudyModeActive,
+  batteryModeActive,
+  setBatteryModeActive,
 }) {
   const [showStartMenu, setShowStartMenu] = useState(false)
-  const [cpuUsage, setCpuUsage] = useState(24)
-  const [ramUsage, setRamUsage] = useState(41)
+  const [cpuUsage, setCpuUsage] = useState(18)
+  const [ramUsage, setRamUsage] = useState(35)
   const [time, setTime] = useState(new Date())
 
   useEffect(() => {
     const timer = setInterval(() => {
       setTime(new Date())
       setCpuUsage((prev) => {
-        const change = Math.floor(Math.random() * 11) - 5
-        return Math.max(10, Math.min(85, prev + change))
+        const change = Math.floor(Math.random() * 9) - 4
+        const maxCpu = batteryModeActive ? 55 : 80
+        return Math.max(5, Math.min(maxCpu, prev + change))
       })
       setRamUsage((prev) => {
-        const change = Math.floor(Math.random() * 7) - 3
-        return Math.max(25, Math.min(75, prev + change))
+        const change = Math.floor(Math.random() * 5) - 2
+        const maxRam = batteryModeActive ? 55 : 75
+        return Math.max(18, Math.min(maxRam, prev + change))
       })
-    }, 2000)
+    }, 2500)
     return () => clearInterval(timer)
-  }, [])
+  }, [batteryModeActive])
 
   const startItems = [
-    { id: 'files', name: 'Explorador de Archivos', icon: Folder, color: 'text-red-500' },
-    { id: 'settings', name: 'Configuración', icon: Settings, color: 'text-red-400' },
-    { id: 'games', name: 'Lanzador de Juegos', icon: Gamepad2, color: 'text-red-500' },
-    { id: 'trash', name: 'Papelera', icon: MemoryStick, color: 'text-gray-400' },
+    { id: 'launcher', name: 'Lanzador Apps', icon: Search, color: 'text-blue-400' },
+    { id: 'files', name: 'Archivos', icon: Folder, color: 'text-blue-500' },
+    { id: 'cleaner', name: 'Limpiar RAM', icon: Activity, color: 'text-green-500' },
+    { id: 'processes', name: 'Procesos', icon: Cpu, color: 'text-blue-500' },
+    { id: 'study', name: 'Modo Estudio', icon: BookOpen, color: 'text-emerald-500' },
+    { id: 'usbsync', name: 'Respaldo USB', icon: Usb, color: 'text-cyan-500' },
+    { id: 'settings', name: 'Configuración', icon: Settings, color: 'text-blue-400' },
+    { id: 'trash', name: 'Papelera', icon: Trash2, color: 'text-gray-400' },
   ]
 
   return (
     <>
       {showStartMenu && (
-        <div className="fixed bottom-14 left-2 z-40 w-72 bg-gray-900/95 backdrop-blur-xl border border-gray-800 rounded-2xl shadow-2xl overflow-hidden">
-          <div className="p-4 border-b border-gray-800">
+        <div className="fixed bottom-12 left-2 z-40 w-72 bg-slate-900/95 border border-slate-800 rounded-xl shadow-xl overflow-hidden">
+          <div className="p-3 border-b border-slate-800">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-700 to-red-500 flex items-center justify-center">
-                <Power size={22} className="text-white" />
+              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-700 to-blue-500 flex items-center justify-center">
+                <Shield size={20} className="text-white" />
               </div>
               <div>
-                <p className="text-white font-semibold">Usuario Gamer</p>
-                <p className="text-gray-500 text-xs">HyperX OS v1.0</p>
+                <p className="text-white font-semibold text-sm">Estudiante</p>
+                <p className="text-slate-500 text-[11px]">EduOS Lite v2.0</p>
               </div>
             </div>
           </div>
 
-          <div className="p-3">
-            <p className="text-gray-500 text-xs uppercase tracking-wider mb-2 px-2">
+          <div className="p-2.5">
+            <p className="text-slate-500 text-[10px] uppercase tracking-wider mb-2 px-2">
               Accesos Rápidos
             </p>
             <div className="grid grid-cols-2 gap-1">
@@ -78,71 +93,85 @@ export default function Taskbar({
                       onOpenWindow(item.id)
                       setShowStartMenu(false)
                     }}
-                    className="flex items-center gap-2 p-2.5 rounded-lg hover:bg-black transition-colors text-left"
+                    className="flex items-center gap-2 p-2 rounded-lg hover:bg-slate-950 transition-colors text-left"
                   >
-                    <div className={`w-9 h-9 rounded-lg bg-black flex items-center justify-center ${item.color}`}>
-                      <Icon size={18} />
+                    <div className={`w-8 h-8 rounded-lg bg-slate-950 flex items-center justify-center ${item.color}`}>
+                      <Icon size={16} />
                     </div>
-                    <span className="text-white text-sm">{item.name}</span>
+                    <span className="text-white text-[12px]">{item.name}</span>
                   </button>
                 )
               })}
             </div>
           </div>
 
-          <div className="p-3 border-t border-gray-800 bg-black/30">
-            <div className="grid grid-cols-2 gap-1">
-              <div className="space-y-1">
-                <p className="text-gray-500 text-xs uppercase tracking-wider px-2">Sistema</p>
-                <div className="flex items-center justify-between px-3 py-2 rounded-lg bg-black/60">
-                  <span className="text-gray-400 text-xs">Versión</span>
-                  <span className="text-red-500 text-xs font-semibold">1.0 B/R</span>
-                </div>
-              </div>
-              <div className="space-y-1">
-                <p className="text-gray-500 text-xs uppercase tracking-wider px-2">Estado</p>
-                <div className="flex items-center justify-between px-3 py-2 rounded-lg bg-black/60">
-                  <span className="text-gray-400 text-xs">Boot</span>
-                  <span className="text-red-500 text-xs font-semibold">Rápido</span>
-                </div>
-              </div>
+          <div className="p-2.5 border-t border-slate-800 bg-slate-950/40">
+            <div className="grid grid-cols-2 gap-1.5">
+              <button
+                onClick={() => {
+                  setStudyModeActive(!studyModeActive)
+                  setShowStartMenu(false)
+                }}
+                className={`px-2.5 py-2 rounded-lg text-[11px] font-medium flex items-center gap-1.5 justify-center ${
+                  studyModeActive
+                    ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                    : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
+                }`}
+              >
+                <BookOpen size={13} />
+                {studyModeActive ? 'Estudio ON' : 'Estudio OFF'}
+              </button>
+              <button
+                onClick={() => {
+                  setBatteryModeActive(!batteryModeActive)
+                  setShowStartMenu(false)
+                }}
+                className={`px-2.5 py-2 rounded-lg text-[11px] font-medium flex items-center gap-1.5 justify-center ${
+                  batteryModeActive
+                    ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                    : 'bg-slate-900 text-slate-400 hover:bg-slate-800'
+                }`}
+              >
+                <Zap size={13} />
+                {batteryModeActive ? 'Batería ON' : 'Batería OFF'}
+              </button>
             </div>
           </div>
         </div>
       )}
 
-      <div className="fixed bottom-0 left-0 right-0 z-30 h-12 bg-black/90 backdrop-blur-xl border-t border-gray-800 flex items-center px-2 gap-1">
+      <div className="fixed bottom-0 left-0 right-0 z-30 h-11 bg-slate-950/90 border-t border-slate-800 flex items-center px-2 gap-1">
         <button
           onClick={() => setShowStartMenu(!showStartMenu)}
-          className={`h-10 px-3 rounded-lg flex items-center gap-2 transition-all ${
+          className={`h-9 px-2.5 rounded-lg flex items-center gap-2 transition-colors ${
             showStartMenu
-              ? 'bg-red-500/20 border border-red-500/50 text-red-500'
-              : 'hover:bg-gray-900 text-white'
+              ? 'bg-blue-500/20 border border-blue-500/40 text-blue-400'
+              : 'hover:bg-slate-800 text-white'
           }`}
         >
-          <Menu size={18} />
-          <span className="text-sm font-semibold hidden sm:inline">Inicio</span>
+          <Menu size={16} />
+          <span className="text-xs font-semibold hidden sm:inline">Inicio</span>
         </button>
 
-        <div className="w-px h-6 bg-gray-800 mx-1"></div>
+        <div className="w-px h-5 bg-slate-800 mx-1"></div>
 
         <button
           onClick={() => onOpenWindow('files')}
-          className="h-10 px-3 rounded-lg hover:bg-gray-900 flex items-center gap-2 text-gray-300 hover:text-red-500 transition-colors"
+          className="h-9 px-2.5 rounded-lg hover:bg-slate-800 flex items-center gap-2 text-slate-300 hover:text-blue-500 transition-colors"
         >
-          <Folder size={18} />
-          <span className="text-sm hidden sm:inline">Archivos</span>
+          <Folder size={16} />
+          <span className="text-xs hidden sm:inline">Archivos</span>
         </button>
 
         <button
-          onClick={() => onOpenWindow('settings')}
-          className="h-10 px-3 rounded-lg hover:bg-gray-900 flex items-center gap-2 text-gray-300 hover:text-red-400 transition-colors"
+          onClick={() => onOpenWindow('launcher')}
+          className="h-9 px-2.5 rounded-lg hover:bg-slate-800 flex items-center gap-2 text-slate-300 hover:text-blue-400 transition-colors"
         >
-          <Settings size={18} />
-          <span className="text-sm hidden sm:inline">Configuración</span>
+          <Search size={16} />
+          <span className="text-xs hidden sm:inline">Apps</span>
         </button>
 
-        <div className="w-px h-6 bg-gray-800 mx-1"></div>
+        <div className="w-px h-5 bg-slate-800 mx-1"></div>
 
         <div className="flex items-center gap-1 flex-1 overflow-x-auto">
           {openWindows.map((win) => {
@@ -153,87 +182,89 @@ export default function Taskbar({
                 onClick={() =>
                   win.isMinimized ? onToggleWindow(win.id) : onFocusWindow(win.id)
                 }
-                className={`h-10 px-3 rounded-lg flex items-center gap-2 transition-all whitespace-nowrap border ${
+                className={`h-9 px-2.5 rounded-lg flex items-center gap-2 transition-colors whitespace-nowrap border ${
                   win.isMinimized
-                    ? 'bg-gray-900/60 border-gray-800 text-gray-500 hover:bg-gray-900'
-                    : 'bg-gray-900 border-red-500/30 text-white shadow-neon-red'
+                    ? 'bg-slate-800/50 border-slate-800 text-slate-500 hover:bg-slate-800'
+                    : 'bg-slate-800 border-blue-500/20 text-white'
                 }`}
               >
-                <Icon size={16} className={win.color} />
-                <span className="text-xs font-medium max-w-24 truncate">{win.title}</span>
+                <Icon size={14} className={win.color} />
+                <span className="text-[11px] font-medium max-w-20 truncate">{win.title}</span>
                 <button
                   onClick={(e) => {
                     e.stopPropagation()
                     onToggleWindow(win.id)
                   }}
-                  className="p-0.5 hover:bg-gray-700 rounded"
+                  className="p-0.5 hover:bg-slate-700 rounded"
                 >
-                  {win.isMinimized ? <Square size={10} /> : <Minus size={10} />}
+                  {win.isMinimized ? <Square size={9} /> : <Minus size={9} />}
                 </button>
                 <button
                   onClick={(e) => {
                     e.stopPropagation()
                     onCloseWindow(win.id)
                   }}
-                  className="p-0.5 hover:bg-red-500/80 rounded"
+                  className="p-0.5 hover:bg-red-500/70 rounded"
                 >
-                  <X size={10} />
+                  <X size={9} />
                 </button>
               </button>
             )
           })}
         </div>
 
-        <div className="flex items-center gap-2 ml-2">
-          <div className="hidden md:flex items-center gap-3 bg-gray-900/60 rounded-lg px-3 py-1.5 border border-gray-800">
-            <div className="flex items-center gap-1.5">
-              <Cpu size={14} className={cpuUsage > 70 ? 'text-red-500' : 'text-red-500'} />
-              <div className="flex flex-col">
-                <span className="text-[10px] text-gray-500 leading-none">CPU</span>
-                <div className="w-16 h-1 bg-gray-800 rounded-full overflow-hidden mt-0.5">
-                  <div
-                    className={`h-full transition-all duration-500 ${
-                      cpuUsage > 70 ? 'bg-red-700' : 'bg-red-500'
-                    }`}
-                    style={{ width: `${cpuUsage}%` }}
-                  ></div>
-                </div>
-              </div>
-              <span className="text-xs font-bold ml-0.5 text-red-500">{cpuUsage}%</span>
+        <div className="flex items-center gap-1.5 ml-1">
+          {studyModeActive && (
+            <div className="hidden sm:flex items-center gap-1 bg-emerald-500/15 rounded-md px-2 py-1 border border-emerald-500/25">
+              <BookOpen size={11} className="text-emerald-400" />
+              <span className="text-[10px] font-medium text-emerald-400">ESTUDIO</span>
             </div>
+          )}
+          {batteryModeActive && (
+            <div className="hidden sm:flex items-center gap-1 bg-amber-500/15 rounded-md px-2 py-1 border border-amber-500/25">
+              <Zap size={11} className="text-amber-400" />
+              <span className="text-[10px] font-medium text-amber-400">AHORRO</span>
+            </div>
+          )}
 
-            <div className="w-px h-5 bg-gray-800"></div>
-
-            <div className="flex items-center gap-1.5">
-              <MemoryStick size={14} className="text-red-400" />
-              <div className="flex flex-col">
-                <span className="text-[10px] text-gray-500 leading-none">RAM</span>
-                <div className="w-16 h-1 bg-gray-800 rounded-full overflow-hidden mt-0.5">
-                  <div
-                    className="h-full transition-all duration-500 bg-red-500"
-                    style={{ width: `${ramUsage}%` }}
-                  ></div>
-                </div>
+          <div className="hidden md:flex items-center gap-2.5 bg-slate-800/60 rounded-md px-2.5 py-1 border border-slate-800">
+            <div className="flex items-center gap-1">
+              <Cpu size={12} className="text-blue-500" />
+              <div className="w-12 h-1 bg-slate-800 rounded-full overflow-hidden">
+                <div
+                  className={`h-full ${cpuUsage > 65 ? 'bg-amber-500' : 'bg-blue-500'}`}
+                  style={{ width: `${cpuUsage}%` }}
+                ></div>
               </div>
-              <span className="text-xs font-bold ml-0.5 text-red-400">{ramUsage}%</span>
+              <span className="text-[10px] font-bold text-blue-500 w-6">{cpuUsage}%</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <MemoryStick size={12} className="text-green-500" />
+              <div className="w-12 h-1 bg-slate-800 rounded-full overflow-hidden">
+                <div
+                  className={`h-full ${ramUsage > 65 ? 'bg-amber-500' : 'bg-green-500'}`}
+                  style={{ width: `${ramUsage}%` }}
+                ></div>
+              </div>
+              <span className="text-[10px] font-bold text-green-500 w-6">{ramUsage}%</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 bg-gray-900/60 rounded-lg px-3 py-1.5 border border-gray-800">
-            <Clock size={14} className="text-red-500" />
+          <div className="flex items-center gap-1.5 bg-slate-800/60 rounded-md px-2.5 py-1 border border-slate-800">
+            <Clock size={12} className="text-blue-500" />
             <div className="flex flex-col items-end leading-tight">
-              <span className="text-white text-sm font-semibold">
+              <span className="text-white text-xs font-medium">
                 {time.toLocaleTimeString('es-ES', {
                   hour: '2-digit',
                   minute: '2-digit',
                   hour12: false,
                 })}
               </span>
-              <span className="text-gray-500 text-[10px]">
+              <span className="text-slate-500 text-[9px]">
                 {time.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit' })}
               </span>
             </div>
-            <ChevronRight size={12} className="text-gray-600" />
+            <ChevronRight size={10} className="text-slate-600" />
           </div>
         </div>
       </div>
