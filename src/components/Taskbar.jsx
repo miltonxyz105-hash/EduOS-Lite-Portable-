@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import {
   Menu,
   Folder,
@@ -7,7 +7,6 @@ import {
   MemoryStick,
   Clock,
   Shield,
-  ChevronRight,
   X,
   Minus,
   Square,
@@ -17,6 +16,7 @@ import {
   Activity,
   Search,
   Trash2,
+  ChevronRight,
 } from 'lucide-react'
 
 export default function Taskbar({
@@ -34,6 +34,25 @@ export default function Taskbar({
   const [cpuUsage, setCpuUsage] = useState(18)
   const [ramUsage, setRamUsage] = useState(35)
   const [time, setTime] = useState(new Date())
+  const startMenuCloseRef = useRef(null)
+
+  useEffect(() => {
+    if (!showStartMenu) return undefined
+    const handleClickOutside = (ev) => {
+      if (startMenuCloseRef.current && !startMenuCloseRef.current.contains(ev.target)) {
+        setShowStartMenu(false)
+      }
+    }
+    const handleEsc = (ev) => {
+      if (ev.key === 'Escape') setShowStartMenu(false)
+    }
+    window.addEventListener('mousedown', handleClickOutside)
+    window.addEventListener('keydown', handleEsc)
+    return () => {
+      window.removeEventListener('mousedown', handleClickOutside)
+      window.removeEventListener('keydown', handleEsc)
+    }
+  }, [showStartMenu])
 
   useEffect(() => {
     const timer = setInterval(() => {
