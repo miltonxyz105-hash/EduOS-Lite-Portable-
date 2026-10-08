@@ -123,8 +123,8 @@ eduos-lite/
 
 ```bash
 # 1. Clonar repositorio
-git clone https://github.com/miltonxyz105-hash/eduos-lite.git
-cd eduos-lite
+git clone https://github.com/miltonxyz105-hash/EduOS-Lite-Portable-.git
+cd EduOS-Lite-Portable-
 
 # 2. Instalar dependencias
 npm install
@@ -170,7 +170,7 @@ vercel --prod --yes
 | Recurso | Enlace |
 |---|---|
 | Producción (alias) | `https://eduos-lite.vercel.app` |
-| Repositorio GitHub | `https://github.com/miltonxyz105-hash/eduos-lite` |
+| Repositorio GitHub | `https://github.com/miltonxyz105-hash/EduOS-Lite-Portable-` |
 
 ---
 
@@ -194,7 +194,7 @@ vercel --prod --yes
 ```
 MIT License
 
-Copyright (c) 2026 EduOS Lite Contributors (miltonxyz105-hash)
+Copyright (c) 2026 EduOS Lite Contributors (miltonxyz105-hash · EduOS-Lite-Portable-)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
