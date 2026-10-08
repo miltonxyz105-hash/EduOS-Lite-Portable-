@@ -1,4 +1,4 @@
-import { Folder, Settings, Trash2, BookOpen, Activity, Search, ShieldCheck, Usb, Globe } from 'lucide-react'
+import { Folder, Settings, Trash2, BookOpen, Activity, Search, Usb, Globe } from 'lucide-react'
 
 const desktopIcons = [
   { id: 'files', name: 'Explorador de Archivos', icon: Folder, color: 'text-blue-500' },

@@ -17,6 +17,7 @@ import {
   Search,
   Trash2,
   ChevronRight,
+  Globe,
 } from 'lucide-react'
 
 export default function Taskbar({
@@ -196,13 +197,21 @@ export default function Taskbar({
         <div className="flex items-center gap-1 flex-1 overflow-x-auto">
           {openWindows.map((win) => {
             const Icon = win.icon
+            const handlePrimary = () =>
+              win.isMinimized ? onToggleWindow(win.id) : onFocusWindow(win.id)
             return (
-              <button
+              <div
                 key={win.id}
-                onClick={() =>
-                  win.isMinimized ? onToggleWindow(win.id) : onFocusWindow(win.id)
-                }
-                className={`h-9 px-2.5 rounded-lg flex items-center gap-2 transition-colors whitespace-nowrap border ${
+                onClick={handlePrimary}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    handlePrimary()
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                className={`h-9 px-2.5 rounded-lg flex items-center gap-2 transition-colors whitespace-nowrap border cursor-pointer outline-none focus:ring-1 focus:ring-blue-500/50 ${
                   win.isMinimized
                     ? 'bg-slate-800/50 border-slate-800 text-slate-500 hover:bg-slate-800'
                     : 'bg-slate-800 border-blue-500/20 text-white'
@@ -215,7 +224,9 @@ export default function Taskbar({
                     e.stopPropagation()
                     onToggleWindow(win.id)
                   }}
+                  onKeyDown={(e) => e.stopPropagation()}
                   className="p-0.5 hover:bg-slate-700 rounded"
+                  aria-label={win.isMinimized ? 'Restaurar ventana' : 'Minimizar ventana'}
                 >
                   {win.isMinimized ? <Square size={9} /> : <Minus size={9} />}
                 </button>
@@ -224,11 +235,13 @@ export default function Taskbar({
                     e.stopPropagation()
                     onCloseWindow(win.id)
                   }}
+                  onKeyDown={(e) => e.stopPropagation()}
                   className="p-0.5 hover:bg-red-500/70 rounded"
+                  aria-label="Cerrar ventana"
                 >
                   <X size={9} />
                 </button>
-              </button>
+              </div>
             )
           })}
         </div>

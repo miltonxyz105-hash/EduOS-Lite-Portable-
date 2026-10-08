@@ -66,7 +66,7 @@ export default function LockScreen({ onUnlock }) {
       <form onSubmit={handleSubmit} className="z-10 w-full max-w-sm">
         <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-6">
           <div className="flex flex-col items-center mb-5">
-            <div className="w-18 h-18 rounded-full bg-slate-950 border-2 border-blue-500/50 flex items-center justify-center mb-3 py-3 px-4">
+            <div className="w-16 h-16 rounded-full bg-slate-950 border-2 border-blue-500/50 flex items-center justify-center mb-3 py-3 px-4">
               <Users size={28} className="text-blue-500" />
             </div>
             <h2 className="text-white font-semibold text-base">Estudiante / Docente</h2>

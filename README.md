@@ -4,17 +4,25 @@
 
 **Government & Educational Portable Web OS**
 
+<br/>
+
+<a href="https://eduos-lite.vercel.app" target="_blank">
+  <img src="https://img.shields.io/badge/%F0%9F%9A%80_LIVE_DEMO-EduOS_Lite-22c55e?style=for-the-badge&logo=vercel&logoColor=white&labelColor=16a34a" alt="Live Demo EduOS Lite" height="40"/>
+</a>
+
+&nbsp;
+
+[![Website](https://img.shields.io/badge/eduos--lite.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://eduos-lite.vercel.app)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-EduOS--Lite--Portable--181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/miltonxyz105-hash/EduOS-Lite-Portable-)
+
+---
+
 [![Version](https://img.shields.io/badge/version-v2.0.0-blue?style=for-the-badge&logo=pinboard&logoColor=white)](./package.json)
 [![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![Node](https://img.shields.io/badge/Node-18+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)]()
 [![License](https://img.shields.io/badge/License-MIT-yellowgreen?style=for-the-badge&logo=bookstack&logoColor=white)](#licencia)
-
----
-
-[![Vercel · EduOS Lite](https://img.shields.io/badge/Vercel-Live-black?style=for-the-badge&logo=vercel&logoColor=white)](https://eduos-lite.vercel.app)
-**Live Demo**: https://eduos-lite.vercel.app
 
 Bundle ultra-optimizado · **~66 KB JS / ~6 KB CSS (gzip)**  
 Funciona en netbooks legacy 1024×600 · dual-core · 2-4 GB RAM
