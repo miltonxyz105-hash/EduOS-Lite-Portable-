@@ -1,4 +1,4 @@
-import { Folder, Settings, Trash2, BookOpen, Activity, Search, Usb } from 'lucide-react'
+import { Folder, Settings, Trash2, BookOpen, Activity, Search, Usb, Globe } from 'lucide-react'
 import FileExplorerWindow from '../components/FileExplorerWindow'
 import SettingsWindow from '../components/SettingsWindow'
 import TrashWindow from '../components/TrashWindow'
@@ -7,6 +7,7 @@ import ProcessViewerWindow from '../components/ProcessViewerWindow'
 import LauncherWindow from '../components/LauncherWindow'
 import StudyModeWindow from '../components/StudyModeWindow'
 import USBSyncWindow from '../components/USBSyncWindow'
+import BrowserWindow from '../components/BrowserWindow'
 
 const WINDOW_CONFIGS = {
   files: {
@@ -80,6 +81,15 @@ const WINDOW_CONFIGS = {
     Component: USBSyncWindow,
     position: { x: 190, y: 105 },
     size: { width: 700, height: 520 },
+  },
+  browser: {
+    id: 'browser',
+    title: 'EduBrowser · Navegador Web',
+    icon: Globe,
+    color: 'text-blue-500',
+    Component: BrowserWindow,
+    position: { x: 140, y: 85 },
+    size: { width: 900, height: 580 },
   },
 }
 

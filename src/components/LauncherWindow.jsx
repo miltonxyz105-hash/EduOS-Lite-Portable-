@@ -28,10 +28,11 @@ const CATEGORIES = [
 ]
 
 const APPS = [
-  { id: 'edu-1', name: 'Plataforma LMS', desc: 'Moodle / Aula Virtual', cat: 'edu', icon: Globe, color: 'bg-cyan-500', recent: true, freq: 8 },
-  { id: 'edu-2', name: 'Visor PDF', desc: 'Libros digitales y apuntes', cat: 'edu', icon: BookOpen, color: 'bg-emerald-500', recent: true, freq: 9 },
-  { id: 'edu-3', name: 'Calculadora Científica', desc: 'Álgebra, cálculo, estadística', cat: 'edu', icon: Calculator, color: 'bg-violet-500', recent: false, freq: 5 },
-  { id: 'edu-4', name: 'Agenda Escolar', desc: 'Horarios y fechas de exámenes', cat: 'edu', icon: Calendar, color: 'bg-pink-500', recent: true, freq: 6 },
+  { id: 'edu-1', name: 'EduBrowser · Navegador Web', desc: 'Navegador oficial Modo Estudio Seguro', cat: 'edu', icon: Globe, color: 'bg-blue-500', recent: true, freq: 10, openId: 'browser' },
+  { id: 'edu-2', name: 'Plataforma LMS', desc: 'Moodle / Aula Virtual', cat: 'edu', icon: Globe, color: 'bg-cyan-500', recent: true, freq: 8 },
+  { id: 'edu-3', name: 'Visor PDF', desc: 'Libros digitales y apuntes', cat: 'edu', icon: BookOpen, color: 'bg-emerald-500', recent: true, freq: 9 },
+  { id: 'edu-4', name: 'Calculadora Científica', desc: 'Álgebra, cálculo, estadística', cat: 'edu', icon: Calculator, color: 'bg-violet-500', recent: false, freq: 5 },
+  { id: 'edu-5', name: 'Agenda Escolar', desc: 'Horarios y fechas de exámenes', cat: 'edu', icon: Calendar, color: 'bg-pink-500', recent: true, freq: 6 },
 
   { id: 'off-1', name: 'Editor de Texto', desc: 'Documentos y trabajos escritos', cat: 'office', icon: FileText, color: 'bg-blue-500', recent: true, freq: 10 },
   { id: 'off-2', name: 'Hoja de Cálculo', desc: 'Planillas y finanzas', cat: 'office', icon: FileText, color: 'bg-green-500', recent: false, freq: 4 },

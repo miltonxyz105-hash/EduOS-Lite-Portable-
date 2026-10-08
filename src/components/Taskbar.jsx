@@ -73,6 +73,7 @@ export default function Taskbar({
 
   const startItems = [
     { id: 'launcher', name: 'Lanzador Apps', icon: Search, color: 'text-blue-400' },
+    { id: 'browser', name: 'EduBrowser', icon: Globe, color: 'text-blue-500' },
     { id: 'files', name: 'Archivos', icon: Folder, color: 'text-blue-500' },
     { id: 'cleaner', name: 'Limpiar RAM', icon: Activity, color: 'text-green-500' },
     { id: 'processes', name: 'Procesos', icon: Cpu, color: 'text-blue-500' },

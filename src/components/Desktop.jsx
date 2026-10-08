@@ -1,7 +1,8 @@
-import { Folder, Settings, Trash2, BookOpen, Activity, Search, ShieldCheck, Usb } from 'lucide-react'
+import { Folder, Settings, Trash2, BookOpen, Activity, Search, ShieldCheck, Usb, Globe } from 'lucide-react'
 
 const desktopIcons = [
   { id: 'files', name: 'Explorador de Archivos', icon: Folder, color: 'text-blue-500' },
+  { id: 'browser', name: 'EduBrowser', icon: Globe, color: 'text-blue-500' },
   { id: 'launcher', name: 'Lanzador de Apps', icon: Search, color: 'text-blue-400' },
   { id: 'cleaner', name: 'Limpiar Sistema', icon: Activity, color: 'text-green-500' },
   { id: 'processes', name: 'Procesos', icon: Activity, color: 'text-blue-500' },
